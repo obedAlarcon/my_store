@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+     - POSTGRES_USER=obed
+     - POSTGRES_PASSWORD=obed2024@
+     -  POSTGRES_DB=my_store
+    ports:
+      - 5432:5432
+      # este es el puerto donde corre esta dbexec postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+# en el volumes colocamos la ruta, esto es para que lo que hagamos lo mande a la bd y lo guarde 
+
+  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+     - PGADMIN_DEFAULT_EMAIL=movil3526@hotmail.com  
+     - PGADMIN_DEFAULT_PASSWORD=obed2024@ # esta ess la password de pgadmin la pagina
+     
+    ports:
+      - 5050:80
+  
+  
+  mysql:
+   image: mysql:5
+   environment:
+    - MYSQL_DATABASE=my_store
+    - MYSQL_USER=root
+    - MYSQL_ROOT_PASSWORD=obed2024@
+    - MYSQL_PORT=3306
+   ports:
+     - 3306:3306
+   volumes:
+     - ./mysql-data:/var/lib/mysql
+
+ 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+     - MYSQL_ROOT_PASSWORD=obed2024@
+     - PMA_HOST=mysql
+
+    ports:
+    - 8080:80
+ 
+ 
+  
+
+
+
+
+  
+  
+  
+  
+  
+  
+      
