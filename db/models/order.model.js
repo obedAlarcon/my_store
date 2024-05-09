@@ -77,4 +77,6 @@ module.exports ={
     Order, OrderSchema, ORDER_TABLE
 }
    
-
+// si por alguna raazon presenta error en la m igracion 
+// es por que hay que pasr el modelo a la migracion sin el campo ne cuestion 
+// si el campo adicional es el que presenta el erro cuando paemos a la micgracion lo ´pasmos sin ese ca¿mpo

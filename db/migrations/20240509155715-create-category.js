@@ -1,6 +1,6 @@
 'use strict';
 
-const { CATEGORY_TABLE, CategorySchema } = require('../models/category.model');
+const {CATEGORY_TABLE,CategorySchema}=require('./../models/category.model');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -10,11 +10,11 @@ module.exports = {
   
   
   
-  
+     
   },
 
   async down (queryInterface, Sequelize) {
-  await queryInterface.dropTable(CATEGORY_TABLE)
+   await queryInterface.dropTable(CATEGORY_TABLE);
   
   
   
