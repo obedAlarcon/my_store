@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
-
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const {checkApiKey}=require('./middlewares/auth.handler');
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
 
 const app = express();
@@ -21,13 +23,31 @@ const options = {
 }
 app.use(cors(options));
 
+ 
+require('./utils/auth')
+
+
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
+app.get('/nueva-ruta',checkApiKey, (req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
+
+
+
+
+// Requerir y usar la estrategia local
+
+// Usar la estrategia local
+
+// Definir tus rutas y otros middlewares
+app.get('/', (req, res) => {
+  res.send('Hola mi server en express');
+});
+
+
 
 routerApi(app);
 
@@ -35,6 +55,7 @@ app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+
 
 
 app.listen(port, () => {

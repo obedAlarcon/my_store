@@ -1,8 +1,10 @@
+const { hash } = require('bcrypt');
 const { timeStamp } = require('console');
 const { allow } = require('joi');
 const { type } = require('os');
 const { Model, DataTypes, Sequelize}=require('sequelize');
 
+const {bcrypt}=require('bcrypt');
 
 const USER_TABLE ='users';
 const UserSchema ={
@@ -51,7 +53,13 @@ class User extends Model {
         sequelize,  //esta es la conexxion
         tableName : USER_TABLE, // table 
         modelName :'User', //nombre del modelo
-        timestamps : false //
+        timestamps : false, //
+   
+   
+   
+   
+   
+   
         }
     }
 }

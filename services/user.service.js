@@ -3,7 +3,9 @@ const boom = require('@hapi/boom');
 //requerimos la conexion desde el archiivo postgres.js
 const getConnection = require('../libs/postgres')
 const pool = require('../libs/postgres.pool')
+ const bcrypt =require('bcrypt')
  const { models}=require('./../libs/sequelize')
+
 
 class UserService {
   constructor() {
@@ -15,9 +17,16 @@ class UserService {
   }
 
   async create(data) {
-    const newUser= await models.User.create(data)
+    const hash= await bcrypt.hash(data.password, 10)// traemo el hash despara validar desde  pass.verify
+    const newUser= await models.User.create({
+      ...data,
+      password:hash
+     });
+    delete newUser.dataValues.password;
     return newUser;
   }
+
+
 
   async find() {
     const response= await models.User.findAll({
@@ -27,6 +36,14 @@ class UserService {
 
     return response;
     // este servicio esta connectado a la capa de rutas 
+  }
+
+
+  async findByEmail(email){
+    const response = await models.User.findOne({
+      where:{email}
+    });
+    return response;
   }
   
 
