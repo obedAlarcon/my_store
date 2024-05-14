@@ -54,10 +54,7 @@ class User extends Model {
         tableName : USER_TABLE, // table 
         modelName :'User', //nombre del modelo
         timestamps : false, //
-   
-   
-   
-   
+     
    
    
         }
