@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const secret = 'myCat'
-const token= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTcxNTY1MDE4OH0.36UhJpk2mCOnCiMwXFWEwd3_bWyAEVL3SunAAspT3YM'
-
+const token= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTcxNTc5NTg0MH0.vW21ns_tWBI4JXFjUqR9vRb3y1KSw7phMO2IOmd3a68'
 
 function verifyToken(toket,secret){
     return jwt.verify(token,secret);

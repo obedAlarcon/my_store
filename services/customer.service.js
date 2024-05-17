@@ -12,8 +12,8 @@ class CustomerService{
         return response;
     }
    async findOne(id){
-    const customer = await models.Customer.findByPk(id);
-    if(!customer){
+    const user = await models.Customer.findByPk(id);
+    if(!user){
         throw boom.notFound('Customer not found');
 
     }
@@ -35,14 +35,14 @@ class CustomerService{
           include:['user']
           
         });
-        delete newCustomer.user.dataValues.password;
+        delete newCustomer.dataValues.user.dataValues.password;
         
         return newCustomer;
     }
 
-    async update(id){
-        const model = await this.findOne(id);
-        const response = await model.update(changes);
+    async update(id,changes){
+        const customer = await this.findOne(id);
+        const response = await customer.update(changes);
         return response;
     }
 

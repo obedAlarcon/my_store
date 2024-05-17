@@ -1,8 +1,7 @@
 const boom = require('@hapi/boom');
 
 //requerimos la conexion desde el archiivo postgres.js
-const getConnection = require('../libs/postgres')
-const pool = require('../libs/postgres.pool')
+
  const bcrypt =require('bcrypt')
  const { models}=require('./../libs/sequelize')
 
@@ -50,7 +49,7 @@ class UserService {
   async findOne(id) {
     const user = await models.User.findByPk(id);
     if(!user){
-     throw boom.notFound('user not founs');
+     throw boom.notFound('user not found');
     }
     return user;
   }
@@ -63,7 +62,7 @@ class UserService {
     }
 
   async delete(id) {
-    const user = await models.User.findByPk(id);
+    const user = await this.findOne(id);
     await user.destroy();
     return { id };
   }

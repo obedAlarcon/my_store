@@ -50,6 +50,7 @@ const OrderSchema= {
     static associate(models){
         this.belongsTo(models.Customer,{ // belongsTo es una relacion ubo a muchos
            as:'customer',
+           
         });
         //
      

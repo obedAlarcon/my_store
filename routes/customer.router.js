@@ -1,5 +1,8 @@
 
 const express = require('express');
+const passport=require('passport')
+
+
 const validatorHandler = require('./../middlewares/validator.handler');
  const CustomerService = require('./../services/customer.service');
  const {updateCustomerSchema, createCustomerSchema, getCustomerSchema}=require('./../schemas/customer.schema');
@@ -11,19 +14,23 @@ const validatorHandler = require('./../middlewares/validator.handler');
  router.get('/', async(req, res, next)=>{
     // con find ejecutamos el metodo getconnection que esta en el archivo customer services
 
-    try {
-
-        const customer = await service.find();
-        res.json(customer);
+    try {       
+        res.json(await service.find());
     } catch (error) {
         next(error);
     }
  });
+ 
+ 
 
  router.get('/:id',
-   validatorHandler(getCustomerSchema,'params'),
-   async(req, res, next)=>{
 
+   passport.authenticate('jwt',{session: false}),
+   
+   
+   validatorHandler(getCustomerSchema,'params'),
+
+   async(req, res, next)=>{
      try {
       const {id}=req.params;
       const customer = await service.findOne(id);
@@ -37,7 +44,10 @@ const validatorHandler = require('./../middlewares/validator.handler');
 
 );
 
+// este codigo es para traer el id cel customer pero eso se hace ocnel query de users es lo mismo!
+
 router.post('/',
+
 validatorHandler(createCustomerSchema, 'body'),
     async ( req, res, next)=>{
         try {
@@ -52,13 +62,16 @@ validatorHandler(createCustomerSchema, 'body'),
 );
 
 router.patch('/:id',
+
+
   validatorHandler(getCustomerSchema, 'params'),
   validatorHandler(updateCustomerSchema, 'body'),
   async (req, res ,next)=>{
     try {
         const {id}=req.params;
         const {body}=req.body;
-        const customer = await service.update(id, body);
+        
+        const customer = await service.update(id,body);
         res.json(customer);
         
     } catch (error) {
@@ -67,13 +80,12 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
-   
 validatorHandler (getCustomerSchema, 'params'),
 async ( req, res, next)=>{
     try {
         const {id}=req.params;
-        await service.delete(id);
-        res.status(201).json({id});
+    
+        res.status(200).json(await service.delete(id));
     } catch (error) {
         
     }

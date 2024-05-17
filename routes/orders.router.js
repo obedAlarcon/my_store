@@ -50,8 +50,8 @@ router.post(
    async (req, res, next)=>{
      try {
       const body =req.body;
-      const newOrder = await service.addItem(body);
-      res.status(201).json(newOrder);
+      const newItem = await service.addItem(body);
+      res.status(201).json(newItem);
      } catch (error) {
       next(error);
      }
