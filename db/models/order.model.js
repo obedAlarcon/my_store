@@ -34,7 +34,7 @@ const OrderSchema= {
      type:DataTypes.VIRTUAL,
      // con el get obtenos y calculamos este campo
      get(){
-        if(this.items.length > 0){
+        if(this.items && this.items.length> 0){
           return this.items.reduce((total,item)=>{
            return total+(item.price * item.OrderProduct.amount);// calculamos el total
 

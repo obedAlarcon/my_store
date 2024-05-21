@@ -1,10 +1,7 @@
-const { hash } = require('bcrypt');
-const { timeStamp } = require('console');
-const { allow } = require('joi');
-const { type } = require('os');
+
 const { Model, DataTypes, Sequelize}=require('sequelize');
 
-const {bcrypt}=require('bcrypt');
+
 
 const USER_TABLE ='users';
 const UserSchema ={
@@ -24,6 +21,13 @@ const UserSchema ={
         allowNull:false,
         type:DataTypes.STRING,
     },
+
+     recoveryToken:{
+            field:'recovery_token',
+            allowNull:true,
+            type:DataTypes.STRING
+     },
+
     role:{
         allowNull:false,
         type:DataTypes.STRING,
