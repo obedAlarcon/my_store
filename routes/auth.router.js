@@ -1,6 +1,8 @@
 const express = require('express');
 
 const passport = require('passport');
+const {checkRoles}=require('./../middlewares/auth.handler');
+
 
 
 const AuthService= require('./../services/auth.service');
@@ -34,5 +36,18 @@ async(req, res, next)=>{
 }
 
 
-)
+);
+
+router.post('/change-password',
+async(req,res,next)=>{
+  try{
+    const{token,newPassword}=req.body;
+    const rta=await service.changePassword(token,newPassword);
+    res.json(rta);
+  }catch(error){
+    next(error);
+  }
+});
+
+
 module.exports = router;
