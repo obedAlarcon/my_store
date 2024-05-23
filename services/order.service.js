@@ -16,6 +16,7 @@ async addItem(data){
 
 
 // esta va alos rutas en profile.rouiter.js
+// esta es una consilta por las asociaciones
 async findByUser(userId)
 {
   const orders = await models.Order.findAll({

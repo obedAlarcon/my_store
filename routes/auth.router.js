@@ -13,6 +13,7 @@ const service = new AuthService();
 router.post('/login', 
 // la estrategias es local 
 passport.authenticate('local', { session: false }),
+
  //que no queremos las sessiones
 async (req, res, next) => {
   try {

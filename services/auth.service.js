@@ -75,7 +75,7 @@ class AuthService {
           {
             throw boom.unauthorized();
           }
-          delete user.dataValues.recoveryToken
+          
     const hash=await bcrypt.hash(newPassword,10);
     await service.update(user.id,{recoveryToken:null,password:hash});
     return{message:'password changed'};
